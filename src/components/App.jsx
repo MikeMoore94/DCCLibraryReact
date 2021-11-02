@@ -1,7 +1,12 @@
 import React, {Component} from 'react'
 import './App.css'
-import TitleBar from './TitleBar/TitleBar'
-import BookViewer from './BookViewer/BookViewer'
+import TitleBar from './TitleBar/TitleBar';
+import BookViewer from './BookViewer/BookViewer';
+import FooterBar from './FooterBar/FooterBar';
+import BookCreater from './BookCreater/BookCreater';
+
+
+
 class App extends Component{
     constructor(props){
         super(props)
@@ -40,6 +45,14 @@ class App extends Component{
         });
     }
 
+    createBook = (newBook) => {
+        console.log('From the createBook on App component', newBook);
+        this.books.push(newBook);
+        this.setState({
+            bookNumber: this.books.length - 1
+        })
+    }
+
 
     render(){
         return(
@@ -47,8 +60,8 @@ class App extends Component{
              <TitleBar />
              
              <BookViewer book={this.books[this.state.bookNumber]} nextBook={this.goToNextBook} previousBook={this.goToPreviousBook} />
-                
-            
+             <BookCreater createNewBook={this.createBook} />
+             <FooterBar />
                
             </div>
         )
